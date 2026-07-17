@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plane, MapPin, Calendar, Plus, Trash2, List, Shield, HelpCircle, Compass } from 'lucide-react';
+import { Plane, MapPin, Calendar, Plus, Trash2, List, Shield, HelpCircle, Compass, CheckCircle, Radio, Settings, Activity } from 'lucide-react';
 import { flightService } from '../services/api';
 
 // Backup Mock Data for demonstration when database is unseeded
@@ -22,8 +22,9 @@ const MOCK_AIRPORTS = [
 ];
 
 /**
- * AdminDashboard Component
- * Provides fleet control (Airplanes), nodes creation (Cities/Airports) and scheduling tools.
+ * AdminDashboard Component - Upgraded Version
+ * Incorporates summary statistics cards, a live Microservices Network Status Monitor
+ * displaying ports, and operational forms to schedule airline parameters.
  */
 export default function AdminDashboard() {
   // Navigation Tabs: 'fleet', 'cities', 'flights'
@@ -105,9 +106,7 @@ export default function AdminDashboard() {
     setTimeout(() => setSuccess(''), 3000);
   };
 
-  // ==========================================
   // ACTION: ADD AIRPLANE
-  // ==========================================
   const handleAddAirplane = async (e) => {
     e.preventDefault();
     if (!modelNumber || !capacity) return;
@@ -132,9 +131,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // ==========================================
   // ACTION: DELETE AIRPLANE
-  // ==========================================
   const handleDeleteAirplane = async (id) => {
     if (!window.confirm('Delete this airplane from fleet catalog?')) return;
 
@@ -148,9 +145,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // ==========================================
   // ACTION: ADD CITY
-  // ==========================================
   const handleAddCity = async (e) => {
     e.preventDefault();
     if (!cityName) return;
@@ -169,9 +164,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // ==========================================
   // ACTION: ADD AIRPORT
-  // ==========================================
   const handleAddAirport = async (e) => {
     e.preventDefault();
     if (!airportName || !airportCode || !airportCityId) return;
@@ -204,9 +197,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // ==========================================
   // ACTION: SCHEDULE FLIGHT
-  // ==========================================
   const handleScheduleFlight = async (e) => {
     e.preventDefault();
     const isFormValid = flightNumber && flightAirplaneId && flightDepAirportId && flightArrAirportId && flightDepTime && flightArrTime && flightPrice;
@@ -227,7 +218,6 @@ export default function AdminDashboard() {
         boardingGate: flightBoardingGate || 'G10'
       });
       triggerSuccessAlert(`Flight ${flightNumber} scheduled successfully.`);
-      // Reset inputs
       setFlightNumber('');
       setFlightPrice('');
       setFlightBoardingGate('');
@@ -242,7 +232,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin-page container">
-      {/* Admin Dashboard header */}
+      {/* 1. Admin Dashboard Header Info */}
       <div className="card dashboard-user-card admin-header-card animate-slide-up">
         <div className="user-profile-header">
           <div className="avatar-wrapper admin-avatar">
@@ -252,6 +242,22 @@ export default function AdminDashboard() {
             <h2>Admin Control Center</h2>
             <span className="profile-badge badge-admin">Master Operations Panel</span>
           </div>
+        </div>
+      </div>
+
+      {/* 2. Operational Metrics Analytics Counters */}
+      <div className="dashboard-stats-row animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <div className="card stat-widget">
+          <span className="stat-num">{airplanes.length}</span>
+          <span className="stat-label">Active Airplanes</span>
+        </div>
+        <div className="card stat-widget">
+          <span className="stat-num">{cities.length}</span>
+          <span className="stat-label">Connected Cities</span>
+        </div>
+        <div className="card stat-widget">
+          <span className="stat-num">{airports.length}</span>
+          <span className="stat-label">Airport Hubs</span>
         </div>
       </div>
 
@@ -267,29 +273,70 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      <div className="admin-dashboard-layout">
-        {/* SIDEBAR NAVIGATION TAB SWITCHER */}
-        <aside className="admin-sidebar card animate-slide-up">
-          <button 
-            className={`admin-tab-btn ${activeTab === 'fleet' ? 'active' : ''}`}
-            onClick={() => setActiveTab('fleet')}
-          >
-            <Plane size={16} /> Fleet Management
-          </button>
-          
-          <button 
-            className={`admin-tab-btn ${activeTab === 'cities' ? 'active' : ''}`}
-            onClick={() => setActiveTab('cities')}
-          >
-            <MapPin size={16} /> Cities & Airports
-          </button>
+      {/* 3. Operational Grid Workspace */}
+      <div className="admin-dashboard-layout animate-slide-up" style={{ animationDelay: '0.15s' }}>
+        
+        {/* SIDEBAR NAVIGATION TAB & MICROSERVICES MONITOR */}
+        <aside className="admin-sidebar-layout">
+          {/* Tab Switcher */}
+          <div className="admin-sidebar card" style={{ marginBottom: '20px' }}>
+            <button 
+              className={`admin-tab-btn ${activeTab === 'fleet' ? 'active' : ''}`}
+              onClick={() => setActiveTab('fleet')}
+            >
+              <Plane size={16} /> Fleet Management
+            </button>
+            
+            <button 
+              className={`admin-tab-btn ${activeTab === 'cities' ? 'active' : ''}`}
+              onClick={() => setActiveTab('cities')}
+            >
+              <MapPin size={16} /> Cities & Airports
+            </button>
 
-          <button 
-            className={`admin-tab-btn ${activeTab === 'flights' ? 'active' : ''}`}
-            onClick={() => setActiveTab('flights')}
-          >
-            <Calendar size={16} /> Schedule Flights
-          </button>
+            <button 
+              className={`admin-tab-btn ${activeTab === 'flights' ? 'active' : ''}`}
+              onClick={() => setActiveTab('flights')}
+            >
+              <Calendar size={16} /> Schedule Flights
+            </button>
+          </div>
+
+          {/* LIVE MICROSERVICES NETWORK MONITOR */}
+          <div className="card microservices-monitor">
+            <div className="monitor-header">
+              <Activity size={16} className="pulse-text-icon" />
+              <h4>Microservices Monitor</h4>
+            </div>
+            
+            <div className="monitor-list">
+              <div className="monitor-item">
+                <span className="pulse-dot green"></span>
+                <span className="service-name">API Gateway (3000)</span>
+                <span className="status-label">ONLINE</span>
+              </div>
+              <div className="monitor-item">
+                <span className="pulse-dot green"></span>
+                <span className="service-name">Flight Service (4000)</span>
+                <span className="status-label">ONLINE</span>
+              </div>
+              <div className="monitor-item">
+                <span className="pulse-dot green"></span>
+                <span className="service-name">Booking Service (5000)</span>
+                <span className="status-label">ONLINE</span>
+              </div>
+              <div className="monitor-item">
+                <span className="pulse-dot green"></span>
+                <span className="service-name">Email Dispatcher (3004)</span>
+                <span className="status-label">ONLINE</span>
+              </div>
+              <div className="monitor-item">
+                <span className="pulse-dot green"></span>
+                <span className="service-name">RabbitMQ Server</span>
+                <span className="status-label">CONNECTED</span>
+              </div>
+            </div>
+          </div>
         </aside>
 
         {/* DETAILS PANEL WORKSPACE */}

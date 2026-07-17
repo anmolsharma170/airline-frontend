@@ -2461,6 +2461,468 @@ a {
   }
 }
 
+/* ==========================================
+   UPGRADED DASHBOARDS STATS & MONITOR STYLING
+   ========================================== */
+.dashboard-header-container {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+  align-items: stretch;
+}
+
+/* Loyalty Progress Widget */
+.loyalty-progress-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 5px solid var(--color-secondary);
+}
+
+.loyalty-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.loyalty-icon {
+  color: var(--color-secondary-hover);
+  animation: pulseGold 2s infinite;
+}
+
+.loyalty-header h4 {
+  font-size: 0.95rem;
+  color: var(--color-dark);
+}
+
+.loyalty-miles {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  display: block;
+}
+
+.loyalty-bar {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-full);
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.loyalty-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+}
+
+.loyalty-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+.loyalty-footer span {
+  opacity: 0.7;
+}
+
+/* Statistics Widgets Row */
+.dashboard-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-widget {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-num {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Section Header & Filters Row */
+.dashboard-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.filter-tabs-nav {
+  display: flex;
+  background-color: rgba(0,0,0,0.04);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  gap: 4px;
+}
+
+.tab-filter-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  opacity: 0.7;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.tab-filter-btn:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.tab-filter-btn.active {
+  background-color: var(--color-primary);
+  color: white;
+  opacity: 1;
+}
+
+/* History Card modifications */
+.card-expanded-active {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.history-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn-cancel-action-text {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-error);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.8;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.btn-cancel-action-text:hover {
+  opacity: 1;
+  background-color: hsl(350, 80%, 96%);
+}
+
+.cancelled-notice-text {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================
+   EXPANDABLE BOARDING PASS STYLING
+   ========================================== */
+.boarding-pass-expandable {
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  background-color: hsl(220, 30%, 98%);
+  animation: slideUp var(--transition-fast) forwards;
+}
+
+.boarding-pass-inner {
+  max-width: 550px;
+  margin: 0 auto;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.pass-top {
+  background-color: var(--color-dark);
+  color: white;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pass-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.logo-icon-rotate {
+  transform: rotate(45deg);
+  color: var(--color-secondary);
+}
+
+.class-label {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.pass-body {
+  background-color: white;
+  padding: 24px;
+  border-bottom: 2px dashed rgba(0,0,0,0.06);
+}
+
+.pass-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.pass-meta-lbl {
+  display: block;
+  font-size: 0.65rem;
+  opacity: 0.5;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.pass-meta-val {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.pass-path-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-light);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+}
+
+.pass-city {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.pass-name {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.path-visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.path-visual .line {
+  flex: 1;
+  border-top: 1px dashed rgba(0,0,0,0.15);
+}
+
+.path-visual .plane {
+  color: var(--color-primary);
+  transform: rotate(45deg);
+}
+
+.pass-footer-row {
+  margin-bottom: 0;
+  border-top: 1px dashed rgba(0,0,0,0.08);
+  padding-top: 16px;
+}
+
+.pass-barcode-section {
+  background-color: white;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.barcode-graphic-sim {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+.qr-icon {
+  color: var(--color-dark);
+  opacity: 0.8;
+}
+
+.pass-barcode-section .stripes {
+  display: flex;
+  height: 35px;
+}
+
+.barcode-val-text {
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  opacity: 0.5;
+}
+
+/* ==========================================
+   MICROSERVICES MONITOR PANEL
+   ========================================== */
+.admin-sidebar-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.microservices-monitor {
+  padding: 24px;
+  border-left: 5px solid var(--color-success);
+}
+
+.monitor-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.pulse-text-icon {
+  color: var(--color-success);
+  animation: heartbeat 1.5s infinite;
+}
+
+.monitor-header h4 {
+  font-size: 0.95rem;
+}
+
+.monitor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.monitor-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.service-name {
+  flex: 1;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.monitor-item .status-label {
+  font-weight: 700;
+  color: var(--color-success);
+  font-size: 0.75rem;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: inline-block;
+  background-color: var(--color-success);
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  animation: pulseGreen 1.5s infinite;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.15); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.15); }
+  70% { transform: scale(1); }
+}
+
+@media (max-width: 992px) {
+  .dashboard-header-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-stats-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .dashboard-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .filter-tabs-nav {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .tab-filter-btn {
+    flex: 1;
+    text-align: center;
+  }
+  .boarding-pass-expandable {
+    padding: 16px;
+  }
+  .pass-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .pass-row div {
+    width: 45%;
+  }
+}
+
+
 
 
 
