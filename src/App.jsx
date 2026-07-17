@@ -1,122 +1,107 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import FlightSearch from './pages/FlightSearch';
+import BookingFlow from './pages/BookingFlow';
+import UserDashboard from './pages/UserDashboard';
+import AdminDashboard from './pages/AdminDashboard';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+/**
+ * Helper component for protecting customer-only routes.
+ * Redirects to /login if user is not authenticated.
+ */
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('token');
+  return token ? children : <Navigate to="/login" replace />;
 }
 
-export default App
+/**
+ * Helper component for protecting admin-only console routes.
+ * Redirects to / if user is not admin or flight staff.
+ */
+function AdminProtectedRoute({ children }) {
+  const token = localStorage.getItem('token');
+  const storedUser = localStorage.getItem('user');
+  
+  if (!token || !storedUser) {
+    return <Navigate to="/login" replace />;
+  }
+  
+  try {
+    const user = JSON.parse(storedUser);
+    const isAdmin = user?.roles?.some(role => role.name === 'Admin') || user?.role === 'Admin';
+    const isFlightCompany = user?.roles?.some(role => role.name === 'FlightCompany') || user?.role === 'FlightCompany';
+    
+    return (isAdmin || isFlightCompany) ? children : <Navigate to="/" replace />;
+  } catch (err) {
+    return <Navigate to="/login" replace />;
+  }
+}
+
+/**
+ * Main Application Shell
+ * Configures global routing and wraps components in our brand navbar & footer.
+ */
+export default function App() {
+  return (
+    <BrowserRouter>
+      {/* App wrapper for flex layout (keeps footer sticky at the bottom) */}
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        
+        {/* Header navigation */}
+        <Navbar />
+        
+        {/* Main Content Area */}
+        <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/flights" element={<FlightSearch />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            
+            {/* Passenger Booking Route (Protected - requires logging in) */}
+            <Route 
+              path="/book/:flightId" 
+              element={
+                <ProtectedRoute>
+                  <BookingFlow />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* User Dashboard / Booking History (Protected) */}
+            <Route 
+              path="/bookings" 
+              element={
+                <ProtectedRoute>
+                  <UserDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Admin Management Dashboard (Admin / Flight Company staff only) */}
+            <Route 
+              path="/admin" 
+              element={
+                <AdminProtectedRoute>
+                  <AdminDashboard />
+                </AdminProtectedRoute>
+              } 
+            />
+            
+            {/* Fallback redirect */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+        
+        {/* Footer info links */}
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
+}
