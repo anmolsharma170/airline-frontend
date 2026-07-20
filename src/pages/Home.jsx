@@ -53,10 +53,41 @@ export default function Home() {
   // Vanta.js Clouds Background Effect
   const vantaRef = useRef(null);
   const vantaEffectRef = useRef(null);
+  const [isNightMode, setIsNightMode] = useState(() => {
+    return localStorage.getItem('theme') === 'night';
+  });
 
   useEffect(() => {
-    if (!vantaEffectRef.current && window.VANTA) {
-      vantaEffectRef.current = window.VANTA.CLOUDS({
+    function handleThemeChange(e) {
+      setIsNightMode(e.detail === 'night');
+    }
+    window.addEventListener('themeChange', handleThemeChange);
+    return () => window.removeEventListener('themeChange', handleThemeChange);
+  }, []);
+
+  useEffect(() => {
+    if (vantaEffectRef.current) {
+      vantaEffectRef.current.destroy();
+      vantaEffectRef.current = null;
+    }
+
+    if (window.VANTA) {
+      const vantaConfig = isNightMode ? {
+        el: vantaRef.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        backgroundColor: 0x050510,
+        skyColor: 0x070b19,
+        cloudColor: 0x1e1b4b,
+        cloudShadowColor: 0x020617,
+        sunColor: 0x38bdf8,
+        sunGlareColor: 0x818cf8,
+        sunlightColor: 0x60a5fa,
+        speed: 1.00
+      } : {
         el: vantaRef.current,
         mouseControls: true,
         touchControls: true,
@@ -71,15 +102,18 @@ export default function Home() {
         sunGlareColor: 0xff6633,
         sunlightColor: 0xff9933,
         speed: 1.00
-      });
+      };
+
+      vantaEffectRef.current = window.VANTA.CLOUDS(vantaConfig);
     }
+
     return () => {
       if (vantaEffectRef.current) {
         vantaEffectRef.current.destroy();
         vantaEffectRef.current = null;
       }
     };
-  }, []);
+  }, [isNightMode]);
 
   // Load Airports on Mount
   useEffect(() => {
@@ -200,10 +234,10 @@ export default function Home() {
     <div className="home-container" style={{ backgroundColor: '#fdfdfd' }}>
       
       {/* BACKGROUND BANNER IMAGE */}
-      <header className="hero-section" ref={vantaRef} style={{ height: '360px', backgroundColor: '#68b8d7', position: 'relative', overflow: 'hidden' }}>
+      <header className="hero-section" ref={vantaRef} style={{ height: '360px', backgroundColor: isNightMode ? '#070b19' : '#68b8d7', position: 'relative', overflow: 'hidden' }}>
         <div className="container hero-content animate-slide-up" style={{ paddingBottom: '30px', position: 'relative', zIndex: 10 }}>
-          <h1 style={{ fontSize: '2.5rem', color: '#0f172a', fontWeight: '800', textShadow: '0 2px 12px rgba(255,255,255,0.8)' }}>Fly Majesty. Fly AeroIndia.</h1>
-          <p style={{ fontSize: '1rem', opacity: '0.95', color: '#1e293b', fontWeight: '600', textShadow: '0 1px 8px rgba(255,255,255,0.7)' }}>Discover direct paths across the globe with gourmet dining and warm hospitality.</p>
+          <h1 style={{ fontSize: '2.5rem', color: isNightMode ? '#ffffff' : '#0f172a', fontWeight: '800', textShadow: isNightMode ? '0 0 20px rgba(56, 189, 248, 0.6)' : '0 2px 12px rgba(255,255,255,0.8)' }}>Fly Majesty. Fly AeroIndia.</h1>
+          <p style={{ fontSize: '1rem', opacity: '0.95', color: isNightMode ? '#e2e8f0' : '#1e293b', fontWeight: '600', textShadow: isNightMode ? '0 0 10px rgba(0,0,0,0.8)' : '0 1px 8px rgba(255,255,255,0.7)' }}>Discover direct paths across the globe with gourmet dining and warm hospitality.</p>
         </div>
       </header>
 

@@ -3369,6 +3369,98 @@ a {
   }
 }
 
+/* ==========================================
+   NIGHT MODE & THEME TOGGLE STYLES
+   ========================================== */
+.btn-theme-toggle {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--color-dark);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: var(--transition-fast);
+  backdrop-filter: blur(10px);
+}
+
+.btn-theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+body.night-mode .btn-theme-toggle {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #f8fafc;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+body.night-mode {
+  background-color: #0b0f19 !important;
+  color: #f8fafc !important;
+}
+
+body.night-mode .home-container {
+  background-color: #0b0f19 !important;
+}
+
+body.night-mode .card,
+body.night-mode .search-card,
+body.night-mode .navbar-container,
+body.night-mode .main-footer,
+body.night-mode .suggestion-dropdown,
+body.night-mode .air-india-search-form-layout {
+  background-color: #111827 !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.night-mode .suggestion-dropdown li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.night-mode .suggestion-dropdown li:hover {
+  background-color: #1f2937 !important;
+}
+
+body.night-mode input,
+body.night-mode select {
+  color: #f8fafc !important;
+}
+
+body.night-mode .segment-lbl,
+body.night-mode .segment-sub,
+body.night-mode .air-india-section-subtitle {
+  color: #94a3b8 !important;
+}
+
+body.night-mode .air-india-section-title {
+  color: #f8fafc !important;
+}
+
+body.night-mode .segment-field-segment:not(:last-child) {
+  border-right-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-mode .widget-tab-btn {
+  color: #cbd5e1 !important;
+}
+
+body.night-mode .widget-tab-btn.active {
+  color: var(--color-secondary) !important;
+}
+
+body.night-mode .widget-tab-btn.active::after {
+  background-color: var(--color-secondary) !important;
+}
+
 
 
 

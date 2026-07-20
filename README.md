@@ -23,7 +23,8 @@
 
 AeroIndia combines deep navy hues, vibrant crimson accents, and warm daytime sky themes to create a sleek aviation interface:
 
-*   **☁️ 3D WebGL Vanta Clouds Hero**: Powered by `Three.js` (r134) and `Vanta.js Clouds`, rendering interactive, animated daytime skies, sun glare, and shifting cloud masses in real-time.
+*   **☁️ 3D WebGL Vanta Clouds Hero**: Powered by `Three.js` (r134) and `Vanta.js Clouds`, rendering interactive, animated daytime skies or midnight skies in real-time.
+*   **🌙 Interactive Night Mode**: Seamless 1-click toggle between Day Mode and Night Mode with persistent state (`localStorage`), persistent CSS variables, and dynamic moonlight Vanta Clouds parameters (`#050510` night sky, indigo clouds, and cyan moonlight aura).
 *   **🎉 Celebratory Booking Confetti**: Integrates `@tsparticles/confetti` to launch a multi-color celebratory burst center-screen when a traveler successfully issues their digital boarding pass.
 *   **Glassmorphic Cards**: Flight selectors, status popups, and auth screens use frosted glass styling with background blur (`backdrop-filter`) and light borders.
 *   **AeroCard Graphic**: Interactive credit card form in checkout that renders inputs live onto a virtual plastic card preview graphic.

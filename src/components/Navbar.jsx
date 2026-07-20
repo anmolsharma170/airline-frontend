@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Plane, User, LogOut, Menu, X, Shield, Calendar, BookOpen } from 'lucide-react';
+import { Plane, User, LogOut, Menu, X, Shield, Calendar, BookOpen, Sun, Moon } from 'lucide-react';
 
 /**
  * Navbar Component
@@ -10,8 +10,30 @@ import { Plane, User, LogOut, Menu, X, Shield, Calendar, BookOpen } from 'lucide
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [isNightMode, setIsNightMode] = useState(() => {
+    return localStorage.getItem('theme') === 'night';
+  });
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Apply/remove night mode class on document body
+  useEffect(() => {
+    if (isNightMode) {
+      document.body.classList.add('night-mode');
+      localStorage.setItem('theme', 'night');
+    } else {
+      document.body.classList.remove('night-mode');
+      localStorage.setItem('theme', 'day');
+    }
+  }, [isNightMode]);
+
+  const toggleNightMode = () => {
+    setIsNightMode(prev => {
+      const next = !prev;
+      window.dispatchEvent(new CustomEvent('themeChange', { detail: next ? 'night' : 'day' }));
+      return next;
+    });
+  };
 
   // Load user status from localStorage on mount and route changes
   useEffect(() => {
@@ -77,7 +99,16 @@ export default function Navbar() {
         </div>
 
         {/* User Auth Buttons / Profile Panel */}
-        <div className="navbar-auth-desktop">
+        <div className="navbar-auth-desktop" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <button 
+            onClick={toggleNightMode} 
+            className="btn-theme-toggle" 
+            title={isNightMode ? "Switch to Day Mode" : "Switch to Night Mode"}
+          >
+            {isNightMode ? <Moon size={16} className="theme-icon-moon" /> : <Sun size={16} className="theme-icon-sun" />}
+            <span>{isNightMode ? "Night" : "Day"}</span>
+          </button>
+
           {user ? (
             <div className="user-profile-badge">
               <User size={16} className="user-icon" />
@@ -119,6 +150,14 @@ export default function Navbar() {
                 Admin Console
               </Link>
             )}
+
+            <button 
+              onClick={toggleNightMode} 
+              className="btn-theme-toggle mobile-theme-btn"
+            >
+              {isNightMode ? <Moon size={16} className="theme-icon-moon" /> : <Sun size={16} className="theme-icon-sun" />}
+              <span>{isNightMode ? "Night Mode Active" : "Day Mode Active"}</span>
+            </button>
 
             <div className="mobile-auth-divider"></div>
 
