@@ -1,105 +1,149 @@
 # ✈️ AeroIndia Airlines - Booking Platform Frontend
 
-### A Premium, High-Fidelity, and Responsive React JS Client for Distributed Airline Microservices
+### A High-Fidelity, Feature-Rich React 19 Client for Distributed Airline Microservices
 
 <br/>
 
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite_8-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Three.js](https://img.shields.io/badge/Three.js_r134-000000?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
+[![Vanta.js](https://img.shields.io/badge/Vanta.js_Clouds-ff3f81?style=for-the-badge)](https://www.vantajs.com/)
+[![tsParticles](https://img.shields.io/badge/tsParticles_Confetti-4cc9f0?style=for-the-badge)](https://particles.js.org/)
 [![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)](https://axios-http.com/)
-[![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com/)
+[![React Router](https://img.shields.io/badge/React_Router_7-CA4245?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com/)
 [![Lucide Icons](https://img.shields.io/badge/Lucide_React-FF6600?style=for-the-badge&logo=lucide&logoColor=white)](https://lucide.dev/)
 
 <br/>
 
-> *Designed to deliver a world-class, premium user experience. Built with pure Vanilla CSS for layout flexibility, featuring glassmorphism, responsive dashboard grids, real-time seat timers, and modular API service integrations.*
+> *AeroIndia is a modern commercial aviation web application designed with pure Vanilla CSS, dynamic 3D WebGL background rendering, real-time seat reservation countdown timers, celebratory booking animations, role-based admin consoles, and resilient offline microservice fallbacks.*
 
 ---
 
-## 🎨 Premium Brand Aesthetics
+## 🎨 Design & Aesthetic System
 
-AeroIndia's visual design is inspired by the premium elements of commercial air travel, combining deep crimson red and warm metallic gold accents against a clean slate/alabaster backdrop.
+AeroIndia combines deep navy hues, vibrant crimson accents, and warm daytime sky themes to create a sleek aviation interface:
 
-*   **Dynamic Design**: Subtle fade-in, slide-up, and pulsing animations that make the application feel fluid and responsive.
-*   **Modern Typography**: Styled using custom Google Fonts (`Outfit` for high-impact headings and `Inter` for highly legible bodies).
-*   **Glassmorphic Widgets**: Flight selectors and checkout sidebars use frosted glass styling with blur backdrops (`backdrop-filter`) and light outlines.
-*   **AeroCard Virtual Graphic**: As passengers type in checkout card numbers, their inputs render in real-time onto an animated plastic credit card wrapper.
+*   **☁️ 3D WebGL Vanta Clouds Hero**: Powered by `Three.js` (r134) and `Vanta.js Clouds`, rendering interactive, animated daytime skies, sun glare, and shifting cloud masses in real-time.
+*   **🎉 Celebratory Booking Confetti**: Integrates `@tsparticles/confetti` to launch a multi-color celebratory burst center-screen when a traveler successfully issues their digital boarding pass.
+*   **Glassmorphic Cards**: Flight selectors, status popups, and auth screens use frosted glass styling with background blur (`backdrop-filter`) and light borders.
+*   **AeroCard Graphic**: Interactive credit card form in checkout that renders inputs live onto a virtual plastic card preview graphic.
+*   **Typography**: Styled using Google Fonts (`Outfit` for high-impact headings and `Inter` for crisp body copy).
 
 ---
 
-## 🧩 Key Features Implemented
+## 🧩 Key Features & Capabilities
 
 ### 1. 🔍 Live Autocomplete Flight Search
-*   Select departure and destination hubs via **real-time suggestion inputs** fetching live airport databases from the Flight microservice.
-*   Gracefully falls back to localized mock travel hubs if the database connection is offline, maintaining interface usability.
+*   Search departure and arrival hubs via **instant focus and query suggestions**. Matches airport names, IATA 3-letter codes (e.g. `DEL`, `BOM`, `JFK`), or city names.
+*   Handles both API-provided airport objects and localized offline datasets seamlessly.
 
-### 2. 🚦 Interactive Multi-Step Checkout Flow
-*   **Step 1: Passenger Information**: Dynamic form fields loop matching traveler counts.
-*   **Step 2: Seat Reservation Hold Timer**: Renders a **5-minute live checkout countdown**, providing a clear visual representation of the backend's automated seat-release cron job.
-*   **Step 3: Secure Card Payment**: Interactive credit card form rendering parameters onto a virtual card graphic.
-*   **Step 4: Digital Boarding Pass**: Displays a boarding pass with passenger name, flight number, times, gate location, and a barcode. Highlights the successful publishing of confirmation mail events to the RabbitMQ queue.
+### 2. 🚦 4-Step Interactive Checkout Flow
+1.  **Passenger Details**: Dynamic passenger form inputs matching selected guest counts.
+2.  **Seat Reservation Window**: Features a **5-minute live countdown timer** reflecting the backend microservice's automated seat-release cron job.
+3.  **Secure Card Checkout**: Integrated payment form with real-time virtual card rendering.
+4.  **Boarding Pass & Confetti**: Generates a digital boarding pass ticket with flight number, gate, and barcode, while firing a `@tsparticles/confetti` burst (`80` particles, `55°` spread, `#ff577f`, `#ffd166`, `#06d6a0`, `#4cc9f0`).
 
 ### 3. 👤 Traveler Trip Dashboard
-*   **Trip Filter Tabs**: Segment trips by status (`All`, `Active`, `Holds/Pending`, `Cancelled`).
-*   **AeroMiles Rewards Milestone**: A gamified flyer loyalty widget showing current miles progress towards loyalty tiers.
-*   **Expandable Boarding Pass**: confirmed tickets expand inline, revealing the digital boarding pass ticket.
-*   **Compensating Cancellations**: Cancelling active bookings triggers Saga compensating paths, reverting seat reserves and changing status to `CANCELLED`.
+*   **Segmented Views**: Filter tickets by status (`All`, `Active`, `Holds/Pending`, `Cancelled`).
+*   **Maharaja Rewards**: Gamified flyer loyalty progress bar showing points accumulation.
+*   **Inline Boarding Pass**: Expand tickets inline to reveal full digital boarding passes.
+*   **Order Cancellation**: Triggers Saga compensating paths to release seat holds and update statuses to `CANCELLED`.
 
-### 4. 🛡️ Admin Operations Console
-*   **Operational Analytics Widgets**: Summary cards displaying active airplanes, connected city hubs, and airport locations.
-*   **Live Microservices Monitor**: Pulsing green status dots checking connections to the API Gateway (`3000`), Flight scheduling (`4000`), Booking server (`5000`), and RabbitMQ queues.
-*   **Fleet Catalog CRUD**: Register new airplane serials or decommission older aircraft from the fleet.
-*   **Schedules Form Builder**: Create new flight schedules by selecting aircraft capacity, linking airport codes, scheduling departure dates, and mapping gates.
+### 4. 🛡️ Admin Management Console
+*   **Role-Based Access Control**: Protected routes (`AdminProtectedRoute`) ensuring only `Admin` or `FlightCompany` roles can enter `/admin`.
+*   **Operational Analytics**: Metrics displaying active aircraft count, connected hub nodes, and scheduled routes.
+*   **Fleet Management**: Register new aircraft models, update capacity parameters, or decommission serials.
+*   **Flight Scheduler**: Create schedules linking airplanes, origin/destination airports, gates, dates, and prices.
 
 ---
 
-## 📂 Project Organization
+## 🔑 How to Log In as Admin
+
+The authentication service includes automatic role resolution:
+
+1. Go to the **Sign In** page (`/login`).
+2. Use **any email containing the word `admin`** (e.g., `admin@aeroindia.com` or `admin@gmail.com`).
+3. Enter any password (minimum 6 characters, e.g., `123456`).
+4. Click **Sign In**.
+
+An **Admin Console** link (with a 🛡️ shield icon) will automatically appear in the top navbar, giving access to `http://localhost:5173/admin`.
+
+---
+
+## 📂 Project Architecture
 
 ```text
-src/
- ├── assets/          # Project images (hero graphic, icons, logos)
- ├── components/      # Reusable layout shell blocks (Navbar, Footer)
- ├── pages/           # Page-level components (Home, FlightSearch, BookingFlow, Dashboards, Auth)
- ├── services/        # Axios API wrapper configs and gateway path mappings
- ├── index.css        # Centralized design system variables, resets, button types, and animations
- └── main.jsx         # React application entry hook
+c:/airline-frontend/
+ ├── index.html            # Main HTML shell; loads Three.js & Vanta Clouds CDNs
+ ├── package.json          # Dependencies (@tsparticles/confetti, axios, lucide-react, react, react-router-dom)
+ ├── vite.config.js        # Vite build tool setup
+ └── src/
+      ├── assets/          # Brand images, hero banners, and vector assets
+      ├── components/      # Reusable UI shells (Navbar, Footer)
+      ├── pages/           # Application views
+      │    ├── Home.jsx           # Landing page with Vanta Clouds & airport search
+      │    ├── FlightSearch.jsx   # Available flight listings & filters
+      │    ├── BookingFlow.jsx    # 4-step wizard with seat timer & celebratory confetti
+      │    ├── UserDashboard.jsx  # Trip history & digital boarding passes
+      │    ├── AdminDashboard.jsx # Fleet catalog & schedule manager
+      │    ├── Login.jsx          # Authentication page with Admin detection
+      │    └── Register.jsx       # User registration page
+      ├── services/
+      │    └── api.js             # Axios client, interceptors, API Gateway routes & offline fallbacks
+      ├── App.jsx                 # Client router & protected route guards
+      ├── index.css               # Design system tokens, variables, utility classes, and media queries
+      └── main.jsx                # React root mount script
 ```
 
 ---
 
-## ⚡ Local Installation & Run Setup
+## ⚙️ Service Endpoints & Gateway Setup
+
+The client routes all requests through the API Gateway endpoint defined in `src/services/api.js`:
+
+| Service | Port | Endpoint Proxy |
+| :--- | :--- | :--- |
+| **API Gateway Edge** | `3000` | `http://localhost:3000` |
+| **Flight Service** | `4000` | `/flightService/api/v1/*` |
+| **Booking Service** | `5000` | `/bookingService/api/v1/*` |
+| **Auth Edge Service** | `3000` | `/api/v1/*` |
+
+> *Note: If backend microservices are offline, the frontend automatically falls back to offline state management, allowing full offline exploration of search, booking, and admin features.*
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- `npm` or `yarn`
 
-Ensure you have [Node.js](https://nodejs.org/) (v14+) installed.
-
-### Step 1 — Clone and Install
-
+### 1. Clone & Install Dependencies
 ```bash
 git clone https://github.com/anmolsharma170/airline-frontend.git
 cd airline-frontend
 npm install
 ```
 
-### Step 2 — Configure Service Endpoints
-
-The API integration layer (`src/services/api.js`) points by default to the Edge API Gateway on port `3000`:
-```javascript
-const API_BASE_URL = 'http://localhost:3000';
-```
-Ensure your backend microservices are running locally to allow successful gateway queries.
-
-### Step 3 — Boot Development Server
-
+### 2. Run Development Server
 ```bash
 npm run dev
 ```
-Open `http://localhost:5173` (or the port specified by Vite) in your browser.
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### Step 4 — Compile Production Bundle
-
-To build the static production distribution bundles:
+### 3. Build for Production
 ```bash
 npm run build
 ```
-This generates a highly optimized `/dist` folder containing bundled client files ready to deploy.
+Generates a production build in the `/dist` directory.
+
+---
+
+## 🛠️ Tech Stack & Dependencies
+
+- **Framework**: React 19, Vite 8
+- **Routing**: React Router Dom 7
+- **Icons**: Lucide React
+- **HTTP Client**: Axios
+- **Graphics & FX**: Three.js (r134), Vanta.js (Clouds), `@tsparticles/confetti`
+- **Styling**: Vanilla CSS3 (Custom Design System with Variables & Grid Layouts)
