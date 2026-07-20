@@ -3592,6 +3592,152 @@ body.night-mode .contact-item span {
   color: #cbd5e1 !important;
 }
 
+/* User Dashboard Booking Cards in Night Mode */
+body.night-mode .dashboard-subtitle {
+  color: #ffffff !important;
+}
+
+body.night-mode .filter-tabs-nav {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.night-mode .tab-filter-btn {
+  color: #cbd5e1 !important;
+  opacity: 0.8 !important;
+}
+
+body.night-mode .tab-filter-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+body.night-mode .tab-filter-btn.active {
+  background-color: var(--color-primary) !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+body.night-mode .booking-history-card {
+  background-color: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.night-mode .history-card-header {
+  background-color: #1f2937 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-mode .ticket-id-tag {
+  color: #ffffff !important;
+}
+
+body.night-mode .history-card-body {
+  background-color: #111827 !important;
+}
+
+body.night-mode .route-node h4 {
+  color: #ffffff !important;
+}
+
+body.night-mode .route-node .airport-code {
+  color: #ff3f81 !important;
+}
+
+body.night-mode .route-plane {
+  color: #94a3b8 !important;
+  opacity: 0.8 !important;
+  background-color: #111827 !important;
+}
+
+body.night-mode .dotted-line-horizontal {
+  border-top-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.night-mode .history-details-grid {
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-mode .details-label {
+  color: #94a3b8 !important;
+  opacity: 0.9 !important;
+}
+
+body.night-mode .details-val {
+  color: #f8fafc !important;
+}
+
+body.night-mode .history-card-footer {
+  background-color: #1f2937 !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-mode .status-confirmed {
+  background-color: rgba(34, 197, 94, 0.15) !important;
+  color: #4ade80 !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+body.night-mode .status-cancelled {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #cbd5e1 !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.night-mode .stat-widget {
+  background-color: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-mode .stat-num {
+  color: #ffffff !important;
+}
+
+body.night-mode .stat-label {
+  color: #94a3b8 !important;
+}
+
+body.night-mode .dashboard-user-card,
+body.night-mode .loyalty-progress-card {
+  background-color: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+body.night-mode .user-profile-header h2 {
+  color: #ffffff !important;
+}
+
+body.night-mode .loyalty-header h4 {
+  color: #ffffff !important;
+}
+
+body.night-mode .loyalty-miles,
+body.night-mode .loyalty-footer {
+  color: #cbd5e1 !important;
+}
+
+/* Flight Search Results in Night Mode */
+body.night-mode .ticket-airline-info .flight-number {
+  color: #ffffff !important;
+}
+
+body.night-mode .ticket-route .city-name {
+  color: #ffffff !important;
+}
+
+body.night-mode .ticket-time {
+  color: #cbd5e1 !important;
+}
+
+body.night-mode .slider-labels span {
+  color: #94a3b8 !important;
+}
+
+body.night-mode .sidebar-header h3 {
+  color: #ffffff !important;
+}
+
 
 
 
