@@ -3406,14 +3406,94 @@ body.night-mode {
   color: #f8fafc !important;
 }
 
+/* Auth Screens (Login & Register) */
+body.night-mode .auth-screen {
+  background: radial-gradient(circle at 50% 50%, #0f172a 0%, #030712 100%) !important;
+}
+
+body.night-mode .auth-card {
+  background-color: #111827 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.night-mode .auth-header h2 {
+  color: #ffffff !important;
+}
+
+body.night-mode .auth-header p {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+body.night-mode .form-label {
+  color: #cbd5e1 !important;
+}
+
+body.night-mode .input-icon {
+  color: #94a3b8 !important;
+  opacity: 0.8 !important;
+}
+
+body.night-mode .form-input {
+  background-color: #1f2937 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.night-mode .form-input::placeholder {
+  color: #64748b !important;
+}
+
+body.night-mode .auth-footer p {
+  color: #94a3b8 !important;
+}
+
+body.night-mode .auth-footer a {
+  color: #ff3f81 !important;
+}
+
+/* Navbar & Logo */
+body.night-mode .navbar-container {
+  background-color: rgba(11, 15, 25, 0.9) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-mode .navbar-logo .logo-text {
+  color: #ffffff !important;
+}
+
+body.night-mode .nav-link,
+body.night-mode .mobile-nav-link {
+  color: #cbd5e1 !important;
+}
+
+body.night-mode .nav-link:hover,
+body.night-mode .mobile-nav-link:hover {
+  color: #ff3f81 !important;
+}
+
+body.night-mode .btn-login-text {
+  color: #f8fafc !important;
+}
+
+body.night-mode .user-profile-badge {
+  background-color: #1f2937 !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #f8fafc !important;
+}
+
+body.night-mode .user-email {
+  color: #f8fafc !important;
+}
+
+/* Home Page & Cards */
 body.night-mode .home-container {
   background-color: #0b0f19 !important;
 }
 
 body.night-mode .card,
 body.night-mode .search-card,
-body.night-mode .navbar-container,
-body.night-mode .main-footer,
 body.night-mode .suggestion-dropdown,
 body.night-mode .air-india-search-form-layout {
   background-color: #111827 !important;
@@ -3424,6 +3504,7 @@ body.night-mode .air-india-search-form-layout {
 
 body.night-mode .suggestion-dropdown li {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f8fafc !important;
 }
 
 body.night-mode .suggestion-dropdown li:hover {
@@ -3445,7 +3526,7 @@ body.night-mode .air-india-section-title {
   color: #f8fafc !important;
 }
 
-body.night-mode .segment-field-segment:not(:last-child) {
+body.night-mode .search-field-segment:not(:last-child) {
   border-right-color: rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -3459,6 +3540,56 @@ body.night-mode .widget-tab-btn.active {
 
 body.night-mode .widget-tab-btn.active::after {
   background-color: var(--color-secondary) !important;
+}
+
+/* Flight Search, Booking Flow & Dashboards */
+body.night-mode .flight-card,
+body.night-mode .booking-card,
+body.night-mode .stat-card,
+body.night-mode .filter-sidebar,
+body.night-mode .admin-card {
+  background-color: #111827 !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-mode table {
+  color: #f8fafc !important;
+}
+
+body.night-mode th {
+  background-color: #1f2937 !important;
+  color: #94a3b8 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-mode td {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  color: #e2e8f0 !important;
+}
+
+/* Footer Styling in Night Mode */
+body.night-mode .main-footer {
+  background-color: #030712 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #94a3b8 !important;
+}
+
+body.night-mode .footer-logo span {
+  color: #ffffff !important;
+}
+
+body.night-mode .footer-description {
+  color: #94a3b8 !important;
+}
+
+body.night-mode .footer-links-col h4 {
+  color: #ffffff !important;
+}
+
+body.night-mode .footer-links-col a,
+body.night-mode .contact-item span {
+  color: #cbd5e1 !important;
 }
 
 
