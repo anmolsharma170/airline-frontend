@@ -50,6 +50,37 @@ export default function Home() {
   const depRef = useRef();
   const arrRef = useRef();
 
+  // Vanta.js Clouds Background Effect
+  const vantaRef = useRef(null);
+  const vantaEffectRef = useRef(null);
+
+  useEffect(() => {
+    if (!vantaEffectRef.current && window.VANTA) {
+      vantaEffectRef.current = window.VANTA.CLOUDS({
+        el: vantaRef.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        backgroundColor: 0xffffff,
+        skyColor: 0x68b8d7,
+        cloudColor: 0xadc1de,
+        cloudShadowColor: 0x183550,
+        sunColor: 0xff9919,
+        sunGlareColor: 0xff6633,
+        sunlightColor: 0xff9933,
+        speed: 1.00
+      });
+    }
+    return () => {
+      if (vantaEffectRef.current) {
+        vantaEffectRef.current.destroy();
+        vantaEffectRef.current = null;
+      }
+    };
+  }, []);
+
   // Load Airports on Mount
   useEffect(() => {
     async function loadAirports() {
@@ -169,10 +200,10 @@ export default function Home() {
     <div className="home-container" style={{ backgroundColor: '#fdfdfd' }}>
       
       {/* BACKGROUND BANNER IMAGE */}
-      <header className="hero-section" style={{ backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.25), rgba(17, 24, 39, 0.45)), url(${heroImage})`, height: '340px' }}>
-        <div className="container hero-content animate-slide-up" style={{ paddingBottom: '30px' }}>
-          <h1 style={{ fontSize: '2.5rem' }}>Fly Majesty. Fly AeroIndia.</h1>
-          <p style={{ fontSize: '1rem', opacity: '0.95' }}>Discover direct paths across the globe with gourmet dining and warm hospitality.</p>
+      <header className="hero-section" ref={vantaRef} style={{ height: '360px', backgroundColor: '#68b8d7', position: 'relative', overflow: 'hidden' }}>
+        <div className="container hero-content animate-slide-up" style={{ paddingBottom: '30px', position: 'relative', zIndex: 10 }}>
+          <h1 style={{ fontSize: '2.5rem', color: '#0f172a', fontWeight: '800', textShadow: '0 2px 12px rgba(255,255,255,0.8)' }}>Fly Majesty. Fly AeroIndia.</h1>
+          <p style={{ fontSize: '1rem', opacity: '0.95', color: '#1e293b', fontWeight: '600', textShadow: '0 1px 8px rgba(255,255,255,0.7)' }}>Discover direct paths across the globe with gourmet dining and warm hospitality.</p>
         </div>
       </header>
 

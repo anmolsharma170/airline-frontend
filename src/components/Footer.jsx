@@ -50,15 +50,15 @@ export default function Footer() {
           <h4>Contact Us</h4>
           <div className="contact-item">
             <Phone size={16} className="contact-icon" />
-            <span>+1 (800) AERO-IND</span>
+            <span>+91-9463605786</span>
           </div>
           <div className="contact-item">
             <Mail size={16} className="contact-icon" />
-            <span>support@aeroindia.com</span>
+            <span>anmosh2004@gmail.com</span>
           </div>
           <div className="contact-item">
             <MapPin size={16} className="contact-icon" />
-            <span>Indira Gandhi Int'l Airport, New Delhi</span>
+            <span>Jalahdhar, Punjab</span>
           </div>
         </div>
       </div>

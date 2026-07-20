@@ -64,17 +64,92 @@ apiClient.interceptors.response.use(
 export const authService = {
   // Register a new user account
   register: async (email, password) => {
-    return apiClient.post('/api/v1/register', { email, password });
+    try {
+      return await apiClient.post('/api/v1/register', { email, password });
+    } catch (err) {
+      // If there is no response status, it means the server is offline or unreachable
+      if (!err.status) {
+        console.warn('Backend is offline. Falling back to local offline storage.');
+        
+        // Retrieve existing offline users
+        const offlineUsersRaw = localStorage.getItem('offline_users');
+        const offlineUsers = offlineUsersRaw ? JSON.parse(offlineUsersRaw) : [];
+        
+        // Check if user already exists
+        if (offlineUsers.some(u => u.email === email)) {
+          throw new Error('This email is already in use (Offline Mode).');
+        }
+        
+        // Save user
+        offlineUsers.push({ email, password });
+        localStorage.setItem('offline_users', JSON.stringify(offlineUsers));
+        
+        return {
+          success: true,
+          message: 'Account created locally (Offline Mode)',
+          data: { email }
+        };
+      }
+      throw err;
+    }
   },
 
   // Log in and receive JWT token
   login: async (email, password) => {
-    return apiClient.post('/api/v1/login', { email, password });
+    try {
+      return await apiClient.post('/api/v1/login', { email, password });
+    } catch (err) {
+      if (!err.status) {
+        console.warn('Backend is offline. Falling back to local offline authentication.');
+        
+        // Retrieve existing offline users
+        const offlineUsersRaw = localStorage.getItem('offline_users');
+        const offlineUsers = offlineUsersRaw ? JSON.parse(offlineUsersRaw) : [];
+        
+        // Find matching user
+        const matchedUser = offlineUsers.find(u => u.email === email);
+        if (!matchedUser) {
+          throw new Error('No account found with this email in offline mode. Please sign up first.');
+        }
+        
+        if (matchedUser.password !== password) {
+          throw new Error('Incorrect password (Offline Mode).');
+        }
+        
+        // Determine role: if email includes 'admin', make them Admin
+        const role = email.toLowerCase().includes('admin') ? 'Admin' : 'Customer';
+        
+        return {
+          success: true,
+          data: {
+            token: 'mock-jwt-token-offline-' + Date.now(),
+            user: {
+              id: 'offline-user-' + email,
+              email: email,
+              role: role,
+              roles: [{ name: role }]
+            }
+          }
+        };
+      }
+      throw err;
+    }
   },
 
   // Assign user roles (Admin Only)
   assignRole: async (userId, roleName) => {
-    return apiClient.post('/api/v1/roles', { userId, roleName });
+    try {
+      return await apiClient.post('/api/v1/roles', { userId, roleName });
+    } catch (err) {
+      if (!err.status) {
+        console.warn('Backend is offline. Assigning role locally.');
+        return {
+          success: true,
+          message: `Simulated Role Assignment: Assigned ${roleName} to ${userId}`
+        };
+      }
+      throw err;
+    }
   }
 };
 
