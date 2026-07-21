@@ -1,9 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Plane, Calendar, Clock, Ticket, Trash2, MailOpen, User, Award, ShieldCheck, QrCode, MapPin } from 'lucide-react';
+import { Plane, Calendar, Clock, Ticket, Trash2, MailOpen, User, Award, ShieldCheck, QrCode, MapPin, CheckCircle2 } from 'lucide-react';
 import { bookingService } from '../services/api';
 
 // Fallback user bookings data if backend returns empty or is offline
 const MOCK_USER_BOOKINGS = [
+  {
+    id: 89104,
+    status: 'CONFIRMED',
+    noOfSeats: 2,
+    totalCost: 12400,
+    flightId: 104,
+    flight: {
+      flightNumber: 'AI-890',
+      departureTime: '2026-07-28T10:00:00.000Z',
+      arrivalTime: '2026-07-28T12:20:00.000Z',
+      departureAirport: { city: 'Delhi', code: 'DEL', name: 'Indira Gandhi International Airport' },
+      arrivalAirport: { city: 'Mumbai', code: 'BOM', name: 'Chhatrapati Shivaji Maharaj International Airport' }
+    }
+  },
   {
     id: 88021,
     status: 'CONFIRMED',
@@ -12,8 +26,8 @@ const MOCK_USER_BOOKINGS = [
     flightId: 102,
     flight: {
       flightNumber: 'AI-204',
-      departureTime: '2026-07-20T12:00:00.000Z',
-      arrivalTime: '2026-07-20T14:20:00.000Z',
+      departureTime: '2026-07-18T12:00:00.000Z',
+      arrivalTime: '2026-07-18T14:20:00.000Z',
       departureAirport: { city: 'Delhi', code: 'DEL', name: 'Indira Gandhi International Airport' },
       arrivalAirport: { city: 'Mumbai', code: 'BOM', name: 'Chhatrapati Shivaji Maharaj International Airport' }
     }
@@ -279,6 +293,10 @@ export default function UserDashboard() {
               const isPending = booking.status === 'PENDING' || booking.status === 'INITIATED';
               const isExpanded = expandedBookingId === booking.id;
 
+              const departureDate = new Date(f.departureTime);
+              const isPastFlight = !isNaN(departureDate.getTime()) && departureDate < new Date();
+              const canCancel = isConfirmed && !isPastFlight;
+
               return (
                 <div key={booking.id} className={`card booking-history-card ${isExpanded ? 'card-expanded-active' : ''}`}>
                   {/* Card Header */}
@@ -349,7 +367,7 @@ export default function UserDashboard() {
                     </div>
                     
                     <div className="footer-actions-right">
-                      {isConfirmed && (
+                      {canCancel && (
                         <button 
                           onClick={() => handleCancelBooking(booking.id)} 
                           className="btn-cancel-action-text"
@@ -357,6 +375,12 @@ export default function UserDashboard() {
                         >
                           <Trash2 size={15} /> Cancel Ticket
                         </button>
+                      )}
+
+                      {isConfirmed && isPastFlight && (
+                        <span className="flown-notice" style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                          <CheckCircle2 size={15} style={{ color: '#10b981' }} /> Flight Completed
+                        </span>
                       )}
 
                       {isPending && (
