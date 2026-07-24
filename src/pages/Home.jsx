@@ -236,7 +236,7 @@ export default function Home() {
       {/* BACKGROUND BANNER IMAGE */}
       <header className="hero-section" ref={vantaRef} style={{ height: '360px', backgroundColor: isNightMode ? '#070b19' : '#68b8d7', position: 'relative', overflow: 'hidden' }}>
         <div className="container hero-content animate-slide-up" style={{ paddingBottom: '30px', position: 'relative', zIndex: 10 }}>
-          <h1 style={{ fontSize: '2.5rem', color: isNightMode ? '#ffffff' : '#0f172a', fontWeight: '800', textShadow: isNightMode ? '0 0 20px rgba(56, 189, 248, 0.6)' : '0 2px 12px rgba(255,255,255,0.8)' }}>Fly Majesty. Fly AeroIndia.</h1>
+          <h1 style={{ fontSize: '2.5rem', color: isNightMode ? '#ffffff' : '#0f172a', fontWeight: '800', textShadow: isNightMode ? '0 0 20px rgba(56, 189, 248, 0.6)' : '0 2px 12px rgba(255,255,255,0.8)' }}>Fly Majesty. Fly AeroMesh.</h1>
           <p style={{ fontSize: '1rem', opacity: '0.95', color: isNightMode ? '#e2e8f0' : '#1e293b', fontWeight: '600', textShadow: isNightMode ? '0 0 10px rgba(0,0,0,0.8)' : '0 1px 8px rgba(255,255,255,0.7)' }}>Discover direct paths across the globe with gourmet dining and warm hospitality.</p>
         </div>
       </header>

@@ -302,7 +302,7 @@ export default function FlightSearch() {
                       <Plane className="carrier-logo-icon" />
                     </div>
                     <div>
-                      <h4>AeroIndia</h4>
+                      <h4>AeroMesh</h4>
                       <span className="aircraft-model">{flight.airplane?.modelNumber || 'Aircraft'}</span>
                     </div>
                   </div>

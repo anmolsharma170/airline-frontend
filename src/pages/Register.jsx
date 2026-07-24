@@ -68,7 +68,7 @@ export default function Register() {
       <div className="card auth-card">
         <div className="auth-header">
           <h2>Create Account</h2>
-          <p>Join AeroIndia to access exclusive flight fares, track points, and fly seamless.</p>
+          <p>Join AeroMesh to access exclusive flight fares, track points, and fly seamless.</p>
         </div>
 
         {/* Display Success Notification */}

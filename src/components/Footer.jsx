@@ -66,7 +66,7 @@ export default function Footer() {
       {/* Footer Bottom Bar */}
       <div className="footer-bottom">
         <div className="container footer-bottom-inner">
-          <p>&copy; {new Date().getFullYear()} AeroIndia Airlines. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} AeroMesh Airlines. All rights reserved.</p>
           <div className="footer-bottom-links">
             <a href="#">Privacy Policy</a>
             <span className="divider">|</span>
